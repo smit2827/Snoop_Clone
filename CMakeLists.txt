@@ -9,6 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
@@ -42,7 +44,11 @@ else()
     endif()
 endif()
 
-target_link_libraries(Pisnoop_Clone PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+include_directories("C:/Users/Public/Documents/Vector/XL Driver Library 20.30.14/bin")
+link_directories("C:/Users/Public/Documents/Vector/XL Driver Library 20.30.14/bin")
+
+target_link_libraries(Pisnoop_Clone PRIVATE Qt${QT_VERSION_MAJOR}::Widgets "C:/Users/Public/Documents/Vector/XL Driver Library 20.30.14/bin/vxlapi64.lib")
+
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

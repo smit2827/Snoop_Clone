@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+
+#include <windows.h>
+#include "vxlapi.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
