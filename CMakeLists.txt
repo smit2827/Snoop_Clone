@@ -26,6 +26,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         newchanneldialog.h newchanneldialog.cpp newchanneldialog.ui
+        ecudevice.h ecudevice.cpp
+        devicemanager.h devicemanager.cpp
+        newdevicedialog.h newdevicedialog.cpp newdevicedialog.ui
+        devicetable.h devicetable.cpp
+        goonlinebuttondelegate.h goonlinebuttondelegate.cpp
+        devicewidget.h devicewidget.cpp
+        vectorinterface.h vectorinterface.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Pisnoop_Clone APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

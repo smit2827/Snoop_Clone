@@ -18,6 +18,9 @@ public:
     explicit NewChannelDialog(QWidget *parent = nullptr);
     ~NewChannelDialog();
 
+private slots:
+    //void on_buttonBox_accepted();
+
 private:
     Ui::NewChannelDialog *ui;
 

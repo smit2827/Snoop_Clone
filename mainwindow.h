@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "devicemanager.h"
+#include "devicetable.h"
+#include "vectorinterface.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,8 +22,15 @@ public:
 
 private slots:
     void on_pushButton_2_clicked();
+    void on_addDeviceButton_clicked();
+    void onDeviceAdded(const QString& name);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    DeviceManager* deviceManager;
+    DeviceTable* deviceTable;
+    VectorInterface* vectorInterface;
 };
 #endif // MAINWINDOW_H

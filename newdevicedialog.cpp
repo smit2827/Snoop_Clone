@@ -1,15 +1,16 @@
-#include "newchanneldialog.h"
-#include "ui_newchanneldialog.h"
+#include "newdevicedialog.h"
+#include "ui_newdevicedialog.h"
+
+#include "devicemanager.h"
+#include <QString>
+#include <QStringList>
 #include "vxlapi.h"
 #include <windows.h>
-#include <QPushButton>
 #include <iostream>
 
-
-
-NewChannelDialog::NewChannelDialog(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::NewChannelDialog)
+NewDeviceDialog::NewDeviceDialog(QWidget *parent, DeviceManager* manager)
+    : QDialog(parent), manager(manager)
+    , ui(new Ui::NewDeviceDialog)
 {
     ui->setupUi(this);
 
@@ -17,24 +18,31 @@ NewChannelDialog::NewChannelDialog(QWidget *parent)
     QStringList channels = getAvailableChannels();
 
     // Populate the combo box
-    ui->newChannelSelectComboBox->addItems(channels);
-
-    // Handle case when no channels are found
-    if (channels.isEmpty()) {
-        // Access the OK button in the QDialogButtonBox
-        QPushButton *okButton = ui->buttonBox->button(QDialogButtonBox::Ok);
-        if (okButton) {
-            okButton->setEnabled(false);  // Disable the OK button
-        }
-    }
+    ui->comboBox->addItems(channels);
 }
 
-NewChannelDialog::~NewChannelDialog()
+NewDeviceDialog::~NewDeviceDialog()
 {
     delete ui;
 }
 
-QStringList NewChannelDialog::getAvailableChannels() {
+
+void NewDeviceDialog::on_buttonBox_accepted()
+{
+    // Collect user input from the dialog
+    QString name = ui->lineEditName->text();
+    int address = ui->lineEditAddress->text().toInt();
+    QString network = ui->comboBox->currentText();
+
+    // Use the passed DeviceManager to add the new device
+    if (manager) {
+        manager->addEcu(name, address, network);
+    }
+
+    accept();  // Close the dialog after adding the device
+}
+
+QStringList NewDeviceDialog::getAvailableChannels() {
     QStringList channelList;
     XLstatus status;
     // unsigned int channelCount = 0;
